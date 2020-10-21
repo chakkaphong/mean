@@ -53,13 +53,16 @@
 <div class="row">
   <div class="col-12">
     <div class="card card-primary review-card">
-      <div class="card-block">
+      <div class="card-block" [ngSwitch]="isLoggedIn()">
         <button
-          (click)="formVisible = true"
+          (click)="formVisible=true"
           class="btn btn-primary float-right"
+          *ngSwitchCase="true"
         >
           Add review
         </button>
+        <a routerLink ="/login" class="btn btn-primary float-right"
+        *ngSwitchDefault>Log in to add review</a>
         <h2 class="card-title">Customer review</h2>
         <div *ngIf="formVisible">
           <form (ngSubmit)="onReviewSubmit()">

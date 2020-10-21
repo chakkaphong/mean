@@ -25,6 +25,7 @@ const getAuthor = (req, res, callback) => {
       .json({"message": "User not found"});
   }
 };
+
 const doSetAverageRating = (location) => {
   if (location.reviews && location.reviews.length > 0) {
     const count = location.reviews.length;
@@ -80,6 +81,7 @@ const doAddReview = (req, res, location, author) => {
     });
   }
 };
+
 const reviewsCreate = (req, res) => {
   getAuthor(req, res,
     (req, res, username) => {
@@ -94,7 +96,7 @@ const reviewsCreate = (req, res) => {
                 .status(400)
                 .json(err);
             } else {
-              doAddReview(req, res, location, userName);
+              doAddReview(req, res, location);
             }
           });
       } else {

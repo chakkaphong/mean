@@ -5,7 +5,7 @@ const auth = jwt({
   secret: process.env.JWT_SECRET,
   algorithms: ['RS256'],
   userProperty: 'payload'
-})
+});
 
 const ctrlLocations = require('../controllers/locations');
 const ctrlReviews = require('../controllers/reviews');
