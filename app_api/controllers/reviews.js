@@ -3,14 +3,15 @@ const Loc = mongoose.model('Location');
 const User = mongoose.model('User');
 
 const getAuthor = (req, res, callback) => {
-  if (req.payload && req.payload.email) {
+  console.log(req.body.author)
+  if (req.body && req.body.author) {
     User
-      .findOne({ email : req.payload.email })
+      .findOne({ name : req.body.author })
       .exec((err, user) => {
         if (!user) {
           return res
             .status(404)
-            .json({"message": "User not found"});
+            .json({"message": "User not found.."});
         } else if (err) {
           console.log(err);
           return res

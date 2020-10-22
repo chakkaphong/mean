@@ -11,31 +11,30 @@ const ctrlLocations = require('../controllers/locations');
 const ctrlReviews = require('../controllers/reviews');
 const ctrlAuth = require('../controllers/authentication');
 
-
 // locations
 router
   .route('/locations')
   .get(ctrlLocations.locationsListByDistance)
-  .post(ctrlLocations.locationsCreate);
+  .post(auth, ctrlLocations.locationsCreate);
 
 router
   .route('/locations/:locationid')
   .get(ctrlLocations.locationsReadOne)
-  .put(ctrlLocations.locationsUpdateOne)
-  .delete(ctrlLocations.locationsDeleteOne);
+  .put(auth, ctrlLocations.locationsUpdateOne)
+  .delete(auth, ctrlLocations.locationsDeleteOne);
 
 // reviews
 router
   .route('/locations/:locationid/reviews')
-  .post(auth, ctrlReviews.reviewsCreate);
+  .post(ctrlReviews.reviewsCreate);
 
 router
   .route('/locations/:locationid/reviews/:reviewid')
   .get(ctrlReviews.reviewsReadOne)
-  .put(auth, ctrlReviews.reviewsUpdateOne)
-  .delete(auth, ctrlReviews.reviewsDeleteOne);
+  .put(ctrlReviews.reviewsUpdateOne)
+  .delete(ctrlReviews.reviewsDeleteOne);
 
-//auth
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
+
 module.exports = router;
